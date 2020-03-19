@@ -7,13 +7,14 @@ public class Main {
         String[] positions = new String[9];
         Board.setBoard(positions);
 
-        // Initialing the game:
+        // Initializing the game:
         int selection = -1; // To be used to check the value the user placed.
         Scanner input; // The user will input information through this.
         boolean gameGoing = true; // To check if the game should end.
         boolean draw = false; // To be used to check if there is a draw.
         boolean againstCPU = true; // To check if two players are playing.
 
+        // Establishing the game
         System.out.print("Hello, this is a tic tac toe game, press anything to start: ");
         input = new Scanner(System.in);
         input.nextLine();
@@ -23,11 +24,13 @@ public class Main {
         }
 
         // Setting up the players:
-        Player p1 = new Player("x");
-        Player p2 = new Player("o");
+        HumanPlayer p1 = new HumanPlayer("x");
+        HumanPlayer p2 = new HumanPlayer("o");
+
         if (againstCPU) {
             // Code for initializing the cpu as the other player.
         }
+
         p1.setTurn(true); // Player 1 will start the game regardless of CPU or Player 2.
 
         // While the game is running...
@@ -38,7 +41,7 @@ public class Main {
 
             // Player 1 turn:
             if (p1.getTurn()) {
-                input = new Scanner(System.in);
+                // input = new Scanner(System.in);
 
                 p1.placeValue(input, selection, positions, p2);
 
@@ -51,7 +54,7 @@ public class Main {
             } // Player 2 turn:
             else {
                 if (!againstCPU) {
-                    input = new Scanner(System.in);
+                    // input = new Scanner(System.in);
 
                     p2.placeValue(input, selection, positions, p1);
 

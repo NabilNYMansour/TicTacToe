@@ -45,6 +45,10 @@ class Player {
         return this.win;
     }
 
+    public boolean getAlreadyPlaced() {
+        return this.alreadyPLaced;
+    }
+
     /**
      * Sets the turn of the player. True if its the player's turn, false otherwise.
      * 
@@ -114,6 +118,20 @@ class Player {
         }
     }
 
+}
+
+class HumanPlayer extends Player {
+
+    /**
+     * Constructor method for a human player.
+     * 
+     * @param c the character the player will be placing.
+     */
+    public HumanPlayer(String c) {
+        super(c);
+        // TODO Auto-generated constructor stub
+    }
+
     /**
      * Places the value inserted by the player into the board. It handles any errors
      * that may arise
@@ -123,10 +141,10 @@ class Player {
      * @param positions    of the board.
      * @param otherPlayer: The other player
      */
-    public void placeValue(Scanner input, int selection,  String[] positions,  Player otherPlayer) {
+    public void placeValue(Scanner input, int selection, String[] positions, Player otherPlayer) {
         try {
             // Showing who's turn:
-            System.out.println("Player " + this.character + ", Your Turn:");
+            System.out.println("Player " + this.getCharacter() + ", Your Turn:");
 
             // If error or already placed:
             this.printErrors();
@@ -139,13 +157,13 @@ class Player {
             this.checkPlaced(positions, selection, otherPlayer);
 
             // Placing the value in the board:
-            if (!alreadyPLaced) {
-                positions[selection] = this.character;
+            if (!this.getAlreadyPlaced()) {
+                positions[selection] = this.getCharacter();
             }
             // In the case of an error:
-        } catch ( ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             this.setError(true);
-        } catch ( InputMismatchException e) {
+        } catch (InputMismatchException e) {
             this.setError(true);
         }
     }
