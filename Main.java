@@ -5,9 +5,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         // Making the positions:
         String[] positions = new String[9];
-        for (Integer i = 0; i < 9; i++) {
-            positions[i] = i.toString(); // Staring with spaces
-        }
+        Board.setBoard(positions);
+
         // Initialing the game:
         int selection = -1; // To be used to check the value the user placed.
         Scanner input; // The user will input information through this.
@@ -71,19 +70,27 @@ public class Main {
                 draw = true;
                 gameGoing = false;
             }
+            if (!gameGoing) {
+                // Win Screen:
+                Board.printScreen(positions);
+                if (draw) {
+                    System.out.println("Draw!");
+                } else if (p1.getWin()) {
+                    System.out.println("Player x Wins!");
+                } else {
+                    System.out.println("Player o Wins!");
+                }
+                // Play again?
+                input.nextLine();
+                System.out.println("Do you want to play again? (Y/N) ");
+                if (input.nextLine().substring(0, 1).equalsIgnoreCase("y")) {
+                    gameGoing = true;
+                    Board.setBoard(positions);
+                } else {
+                    input.close();
+                }
+            }
         }
-        input.close();
-        // Win Screen:
-        Board.printScreen(positions);
-        if (draw) {
-            System.out.println("Draw!");
-        } else if (p1.getWin()) {
-            System.out.println("Player x Wins!");
-        } else {
-            System.out.println("Player o Wins!");
-        }
-        // Write code for play again.
     }
-
 
 }

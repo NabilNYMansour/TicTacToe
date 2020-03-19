@@ -99,4 +99,10 @@ public class Board {
         }
         return true;
     }
+
+public static void setBoard(String[] positions){
+    for (Integer i = 0; i < positions.length; i++) {
+        positions[i] = i.toString(); // Staring with spaces
+    }
+}
 }
