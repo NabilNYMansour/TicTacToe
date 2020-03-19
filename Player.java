@@ -104,7 +104,7 @@ class Player {
      * @param otherPlayer: The other player.
      */
     public void checkPlaced(String[] positions, int index, Player otherPlayer) {
-        if (!Main.isNumber(positions[index])) {
+        if (!Board.isNumber(positions[index])) {
             this.alreadyPLaced = true;
             this.PlayerTurn = true;
             otherPlayer.setTurn(false);
