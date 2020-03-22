@@ -1,6 +1,3 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 class Player {
     private boolean error; // In the case of an error.
     private boolean alreadyPLaced; // If the player has already placed a value.
@@ -81,8 +78,8 @@ class Player {
     /**
      * Sets the win token to true. To be used when a player has won.
      */
-    public void ActivateWin() {
-        this.win = true;
+    public void setWin(boolean condition) {
+        this.win = condition;
     }
 
     /**
@@ -118,53 +115,17 @@ class Player {
         }
     }
 
-}
-
-class HumanPlayer extends Player {
-
     /**
-     * Constructor method for a human player.
+     * Check if the player placed a false parameter and keeps their turn running if
+     * so.
      * 
-     * @param c the character the player will be placing.
+     * @param otherPlayer: the other player
      */
-    public HumanPlayer(String c) {
-        super(c);
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
-     * Places the value inserted by the player into the board. It handles any errors
-     * that may arise
-     * 
-     * @param input        of the user.
-     * @param selection    of the user.
-     * @param positions    of the board.
-     * @param otherPlayer: The other player
-     */
-    public void placeValue(Scanner input, int selection, String[] positions, Player otherPlayer) {
-        try {
-            // Showing who's turn:
-            System.out.println("Player " + this.getCharacter() + ", Your Turn:");
-
-            // If error or already placed:
-            this.printErrors();
-
-            // Getting the value from the user:
-            System.out.print("Place position ");
-            selection = input.nextInt();
-
-            // Checking if the player has already placed this value:
-            this.checkPlaced(positions, selection, otherPlayer);
-
-            // Placing the value in the board:
-            if (!this.getAlreadyPlaced()) {
-                positions[selection] = this.getCharacter();
-            }
-            // In the case of an error:
-        } catch (ArrayIndexOutOfBoundsException e) {
-            this.setError(true);
-        } catch (InputMismatchException e) {
-            this.setError(true);
+    public void checkError(Player otherPlayer) {
+        if (this.error) {
+            this.PlayerTurn = true;
+            otherPlayer.setTurn(false);
         }
     }
+
 }
