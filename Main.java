@@ -29,8 +29,6 @@ public class Main {
         // Setting up the players:
         HumanPlayer p1 = new HumanPlayer("x");
         HumanPlayer p2 = new HumanPlayer("o");
-
-        // Setting up the AI:
         ArtificialPlayer pc = new ArtificialPlayer("o");
 
         p1.setTurn(true); // Player 1 will start the game regardless of CPU or Player 2.
@@ -75,8 +73,8 @@ public class Main {
                         }
                         cpuStart = false;
                     } else {
-                        pc.checkWin(positions, p1);
-                        pc.createPlan(positions);
+                        pc.cantWin(positions, p1);
+                        pc.checkWillWin(positions);
                         pc.placeValue(positions);
                     }
                     p1.setTurn(true);
@@ -85,7 +83,6 @@ public class Main {
                         gameGoing = false;
                         p2.setWin(true);
                     }
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 }
             }
             if (Board.checkDraw(p1.getCharacter(), p2.getCharacter(), positions)) {
@@ -109,14 +106,10 @@ public class Main {
                     // Resetting the game:
                     gameGoing = true;
                     Board.setBoard(positions);
-
-                    // Resetting the players' turns.
                     p1.setTurn(true);
                     p2.setTurn(false);
                     p1.setWin(false);
                     p2.setWin(false);
-
-                    // Resetting the AI:
                     cpuStart = true;
 
                     // Asking if the player wants to play with a human again:
